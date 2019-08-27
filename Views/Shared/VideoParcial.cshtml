@@ -1,0 +1,28 @@
+@model Video
+
+<div class="card mb-4 animated fadeIn">
+  <div class="card-body">          
+    <h3>
+      @Model.Titulo
+    </h3>    
+    <div class="embed-responsive embed-responsive-21by9">
+      <iframe 
+        class="embed-responsive-item" 
+        src="@Model.Url" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+    <p>
+      @Model.Descripcion
+    </p>
+    @if(User.IsInRole("Administrador")) {
+      <hr />
+      <div class="btn-group" role="group">      
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-secondary">Editar</a>
+        <button type="button" class="btn btn-sm btn-danger">Borrar</button>
+      </div>
+    }    
+  </div>
+</div>
