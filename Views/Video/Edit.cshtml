@@ -5,3 +5,13 @@
     <input asp-for="Id" class="form-control" type="hidden" />    
     <partial name="VideoFormulario" />
 </form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('select').select2({
+                theme: 'bootstrap4'
+            });
+        });
+    </script>
+}

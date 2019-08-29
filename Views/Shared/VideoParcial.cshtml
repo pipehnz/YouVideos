@@ -1,11 +1,19 @@
 @model Video
 
-<div class="card mb-4 animated fadeIn">
-  <div class="card-body">          
-    <h3>
+<div class="card shadow mb-4 animated fadeIn">
+  <div class="card-body">
+    <h5 class="card-title">
       @Model.Titulo
-    </h3>    
-    <div class="embed-responsive embed-responsive-21by9">
+    </h5>
+    <div class="mb-2">
+      @foreach (var item in Model.VideoTag)
+      {
+        <a href="#" class="badge badge-secondary">
+          @item.Tag.Descripcion
+        </a>
+      }
+    </div>
+    <div class="embed-responsive embed-responsive-21by9 mb-2">
       <iframe 
         class="embed-responsive-item" 
         src="@Model.Url" 
@@ -14,9 +22,12 @@
         allowfullscreen>
       </iframe>
     </div>
-    <p>
-      @Model.Descripcion
-    </p>
+    
+    <blockquote class="blockquote mb-0">
+      <footer class="blockquote-footer">
+        @Model.Descripcion
+      </footer>
+    </blockquote>
     @if(User.IsInRole("Administrador")) {
       <hr />
       <div class="btn-group" role="group">      

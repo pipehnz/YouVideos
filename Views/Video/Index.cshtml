@@ -1,4 +1,6 @@
+@model List<Video>
+
 @foreach (var item in Model)
 {
-    <partial name="VideoParcial" model="@item" />
+    <partial name="VideoParcial" model="item" />
 }

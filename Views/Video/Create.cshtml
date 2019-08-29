@@ -2,3 +2,13 @@
     <legend>Crear video</legend>
     <partial name="VideoFormulario" />
 </form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('select').select2({
+                theme: 'bootstrap4'
+            });
+        });
+    </script>
+}

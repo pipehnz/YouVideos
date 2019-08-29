@@ -17,14 +17,17 @@
     </environment>
     
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://bootswatch.com/4/cosmo/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@ttskch/select2-bootstrap4-theme@1.2.3/dist/select2-bootstrap4.min.css" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <strong class="text-secondary">You</strong>Videos
+                <a class="navbar-brand" asp-area="" asp-controller="Video" asp-action="Index">
+                    <strong class="text-danger">You</strong>Videos
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -39,11 +42,6 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Video" asp-action="Create">Nuevo video</a>
-                            </li>             
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">
-                                    @User.Identity.Name
-                                </a>
                             </li>
                         }
                         else
@@ -54,9 +52,20 @@
                         }
                     </ul>
                 </div>
-                <span class="navbar-text">
-                <img class="img-brand" src="@User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value" alt="">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <span class="navbar-text">
+                    @if (User.Identity.IsAuthenticated) 
+                    {
+                        <a asp-controller="Account" asp-action="Logout">
+                            <span class="mr-2">
+                                @User.Identity.Name
+                            </span>
+                            <img class="img-brand" src="@User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value" alt="@User.Identity.Name">
+                        </a>
+                    }                
                 </span>
+                </div>
+                
             </div>
         </nav>
     </header>
@@ -66,12 +75,6 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - HelloWorldMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -92,6 +95,7 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

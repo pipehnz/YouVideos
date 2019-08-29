@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using HelloWorldMVC.Data;
-using HelloWorldMVC.Helpers.Interfaces;
-using HelloWorldMVC.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -43,12 +41,6 @@ namespace HelloWorldMVC
             {
                 options.UseSqlServer(Configuration.GetConnectionString("default"));
             });
-
-            if(Env.IsDevelopment()) {
-                services.AddSingleton<IVideoService, GenericVideoService>();
-            } else {
-                services.AddSingleton<IVideoService, DataBaseVideoService>();
-            }
 
             // Add authentication services
             services.AddAuthentication(options =>
