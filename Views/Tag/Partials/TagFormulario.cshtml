@@ -1,0 +1,18 @@
+@model Tag
+
+<div class="form-group">
+    <label>Descripción</label>
+    <input asp-for="Descripcion" class="form-control w-50" placeholder="Asigna una descripción al tag" />
+    <span asp-validation-for="Descripcion" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label>¿Deseas ver este tag al crear un video?</label>
+    <select asp-for="EsVisible" class="form-control w-25">
+        <option value="true">Sí, mostrar</option>
+        <option value="false">No, ocultar</option>
+    </select>
+    <span asp-validation-for="EsVisible" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <input class="btn btn-primary" type="submit" />
+</div>

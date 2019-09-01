@@ -38,10 +38,17 @@
                         @if (User.Identity.IsAuthenticated)
                         {               
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Video" asp-action="Index">Videos</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Tag" asp-action="Index">Tags</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Video" asp-action="Create">Nuevo video</a>
+                            <li class="nav-item text-dark dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Vídeos
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Video">Ver todos</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-action="Create" asp-controller="Video">Nuevo vídeo</a>
+                                </div>
                             </li>
                         }
                         else

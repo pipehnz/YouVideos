@@ -11,7 +11,7 @@ using HelloWorldMVC.Helpers;
 
 namespace HelloWorldMVC.Controllers 
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
     public class VideoController : Controller
     {
         private VideoContext _context;
@@ -28,17 +28,17 @@ namespace HelloWorldMVC.Controllers
             return View(Videos);
         }
 
-        [Authorize(Roles = "Creador, Administrador")]
+        [Authorize(Roles = "Creador")]
         public async Task<IActionResult> Create()
         {
-            ViewBag.Tags = await _context.Tags.ToListAsync();
+            ViewBag.Tags = await _context.Tags.Where(t => t.EsVisible).ToListAsync();
 
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Creador, Administrador")]
+        [Authorize(Roles = "Creador")]
         public async Task<IActionResult> Create(Video video, List<int> Tags)
         {
             if(ModelState.IsValid) {            
@@ -69,24 +69,22 @@ namespace HelloWorldMVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Tags = await _context.Tags.ToListAsync();
+            ViewBag.Tags = await _context.Tags.Where(t => t.EsVisible).ToListAsync();
 
             return View(video);
         }
 
-        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Edit(int id)
         {
             Video video = await _context.Videos.Include(v => v.VideoTag).FirstOrDefaultAsync(v => v.Id == id);
 
-            ViewBag.Tags = await _context.Tags.ToListAsync();
+            ViewBag.Tags = await _context.Tags.Where(t => t.EsVisible).ToListAsync();
 
             return View(video);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Edit(Video video, List<int> Tags)
         {
             if(ModelState.IsValid) {            
@@ -120,7 +118,7 @@ namespace HelloWorldMVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Tags = await _context.Tags.ToListAsync();
+            ViewBag.Tags = await _context.Tags.Where(t => t.EsVisible).ToListAsync();
 
             return View(video);
         }

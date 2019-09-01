@@ -60,3 +60,11 @@ body {
   width: 30px;
   height: 30px;
 }
+
+.divider {  
+  border-bottom: 1px dashed #e4dfdf;
+  height: 5px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  width: 100%;
+}
