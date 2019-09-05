@@ -1,24 +1,19 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace HelloWorldMVC.Controllers
 {   
     public class AccountController : Controller
     {
-        public AccountController(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
-        
         public async Task Login(string returnUrl = "/")
         {
-            await HttpContext.ChallengeAsync("Auth0", new AuthenticationProperties() { RedirectUri = Configuration["Auth0:RedirectUri"] });
+            await HttpContext.ChallengeAsync("Auth0", new AuthenticationProperties() {
+                RedirectUri = Environment.GetEnvironmentVariable("AUTH0_REDIRECT_URI")
+            });
         }
 
         public IActionResult AccessDenied(string returnUrl = "/")

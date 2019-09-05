@@ -37,9 +37,8 @@ namespace HelloWorldMVC
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddDbContext<VideoContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("default"));
+            services.AddDbContext<VideoContext>(options => {
+                options.UseSqlServer(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
             });
 
             // Add authentication services
@@ -53,11 +52,11 @@ namespace HelloWorldMVC
             .AddOpenIdConnect("Auth0", options =>
             {
                 // Set the authority to your Auth0 domain
-                options.Authority = $"https://{Configuration["Auth0:Domain"]}";
-
+                options.Authority = $"https://{Environment.GetEnvironmentVariable("AUTH0_DOMAIN")}";
+                
                 // Configure the Auth0 Client ID and Client Secret
-                options.ClientId = Configuration["Auth0:ClientId"];
-                options.ClientSecret = Configuration["Auth0:ClientSecret"];
+                options.ClientId = Environment.GetEnvironmentVariable("AUTH0_CLIENT_ID");
+                options.ClientSecret = Environment.GetEnvironmentVariable("AUTH0_CLIENT_SECRET");
 
                 // Set response type to code
                 options.ResponseType = "code";
@@ -87,7 +86,7 @@ namespace HelloWorldMVC
                     // handle the logout redirection
                     OnRedirectToIdentityProviderForSignOut = (context) =>
                     {
-                        var logoutUri = $"https://{Configuration["Auth0:Domain"]}/v2/logout?client_id={Configuration["Auth0:ClientId"]}";
+                        var logoutUri = $"https://{Environment.GetEnvironmentVariable("AUTH0_DOMAIN")}/v2/logout?client_id={Environment.GetEnvironmentVariable("AUTH0_CLIENT_ID")}";
 
                         var postLogoutUri = context.Properties.RedirectUri;
                         if (!string.IsNullOrEmpty(postLogoutUri))
