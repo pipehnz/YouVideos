@@ -38,7 +38,7 @@ namespace HelloWorldMVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<VideoContext>(options => {
-                options.UseSqlServer(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
+                options.UseMySQL(Configuration.GetConnectionString("default"));
             });
 
             // Add authentication services
