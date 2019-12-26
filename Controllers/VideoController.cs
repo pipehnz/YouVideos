@@ -11,7 +11,7 @@ using HelloWorldMVC.Helpers;
 
 namespace HelloWorldMVC.Controllers 
 {
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public class VideoController : Controller
     {
         private VideoContext _context;

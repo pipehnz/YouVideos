@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HelloWorldMVC.Controllers
 {
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public class TagController : Controller
     {
         private VideoContext _context { get; set; }

@@ -34,29 +34,20 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1"> 
-                        @if (User.Identity.IsAuthenticated)
-                        {               
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Tag" asp-action="Index">Tags</a>
-                            </li>
-                            <li class="nav-item text-dark dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Vídeos
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" asp-action="Index" asp-controller="Video">Ver todos</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" asp-action="Create" asp-controller="Video">Nuevo vídeo</a>
-                                </div>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Iniciar sesión</a>
-                            </li>
-                        }
+                    <ul class="navbar-nav flex-grow-1">                                     
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Tag" asp-action="Index">Tags</a>
+                        </li>
+                        <li class="nav-item text-dark dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Vídeos
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Video">Ver todos</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-action="Create" asp-controller="Video">Nuevo vídeo</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">

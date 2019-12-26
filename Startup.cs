@@ -38,10 +38,12 @@ namespace HelloWorldMVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<VideoContext>(options => {
-                options.UseMySQL(Configuration.GetConnectionString("default"));
+                //options.UseMySQL(Configuration.GetConnectionString("default"));
+                options.UseInMemoryDatabase("YouVideosDB");
             });
 
             // Add authentication services
+            /*
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -107,6 +109,7 @@ namespace HelloWorldMVC
                     }
                 };
             });
+            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -127,7 +130,7 @@ namespace HelloWorldMVC
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
